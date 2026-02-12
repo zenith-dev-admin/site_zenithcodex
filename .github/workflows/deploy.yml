@@ -17,6 +17,6 @@ jobs:
           port: 65002
           script: |
             cd /home/ubuntu/zenithcodex
+            git config --global --add safe.directory /home/ubuntu/zenithcodex
             git pull origin main
-            # Força o rebuild para garantir que as variáveis NEXT_PUBLIC entrem
             docker compose up -d --build
