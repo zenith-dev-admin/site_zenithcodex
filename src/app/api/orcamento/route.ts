@@ -7,6 +7,11 @@ export async function POST(req: Request) {
         const body = await req.json();
         const { name, email, projectType, description, budget } = body;
 
+        // Validation
+        if (!name || !email || !projectType) {
+            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+        }
+
         // 1. Save to Supabase
         const { error: dbError } = await supabase
             .from('budget_requests')
@@ -15,12 +20,16 @@ export async function POST(req: Request) {
             ]);
 
         if (dbError) {
-            console.error('Supabase Error:', dbError);
-            return NextResponse.json({ error: 'Failed to save request' }, { status: 500 });
+            console.error('Supabase Error details:', JSON.stringify(dbError, null, 2));
+            // Return specific error hint if table missing (code 42P01) or auth error
+            return NextResponse.json({
+                error: 'Database operation failed',
+                details: dbError.message
+            }, { status: 500 });
         }
 
         // 2. Send Email Notification (to Admin)
-        await sendEmail({
+        const emailAdmin = await sendEmail({
             to: 'contact@zenithcodex.com', // Replace with admin email
             subject: `New Budget Request: ${projectType} from ${name}`,
             html: `
@@ -34,8 +43,12 @@ export async function POST(req: Request) {
       `
         });
 
+        if (!emailAdmin.success) {
+            console.warn('Failed to send admin email:', emailAdmin.error);
+        }
+
         // 3. Send Confirmation Email (to User)
-        await sendEmail({
+        const emailUser = await sendEmail({
             to: email,
             subject: 'Recebemos sua solicitação - ZenithCodex',
             html: `
@@ -47,6 +60,10 @@ export async function POST(req: Request) {
         <p>Equipe ZenithCodex</p>
       `
         });
+
+        if (!emailUser.success) {
+            console.warn('Failed to send user confirmation email:', emailUser.error);
+        }
 
         return NextResponse.json({ success: true });
     } catch (error) {

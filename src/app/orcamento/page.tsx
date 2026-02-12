@@ -61,14 +61,18 @@ export default function OrcamentoPage() {
                 body: JSON.stringify(values),
             });
 
+            const data = await response.json();
+
             if (!response.ok) {
-                throw new Error("Failed to submit");
+                // Use server error message if available
+                throw new Error(data.error || data.details || "Failed to submit");
             }
 
             setIsSuccess(true);
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error submitting form:", error);
-            // In a real app, show error toast
+            // Alert the user with the specific error (for debugging/feedback)
+            alert(`Erro ao enviar: ${error.message}`);
         } finally {
             setIsSubmitting(false);
         }

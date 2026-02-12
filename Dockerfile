@@ -16,10 +16,13 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Build the project
+ARG NEXT_PUBLIC_SUPABASE_URL
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
+
 # Next.js telemetry disable
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Build the project
 RUN npm run build
 
 # Production image, copy all the files and run next
