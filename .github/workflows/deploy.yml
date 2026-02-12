@@ -1,0 +1,21 @@
+name: Deploy Zenith Codex
+
+on:
+  push:
+    branches: [ "main" ] # Dispara quando você dá push na main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/ubuntu/zenithcodex
+            git pull origin main
+            # Força o rebuild para garantir que as variáveis NEXT_PUBLIC entrem
+            docker compose up -d --build
