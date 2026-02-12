@@ -9,7 +9,7 @@ services:
     image: site_zenithcodex:latest
     container_name: site_zenithcodex
     expose:
-      - "3000"
+      - "4000:3000"
     environment:
       - NODE_ENV=production
       - GEMINI_API_KEY=${GEMINI_API_KEY}
@@ -19,9 +19,3 @@ services:
       - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
       - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
     restart: always
-    networks:
-      - proxy_network
-
-networks:
-  proxy_network:
-    external: true
