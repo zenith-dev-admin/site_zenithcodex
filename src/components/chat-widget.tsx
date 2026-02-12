@@ -25,6 +25,27 @@ export function ChatWidget() {
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const [isMounted, setIsMounted] = useState(false);
+
+    // Load messages from localStorage on mount
+    useEffect(() => {
+        setIsMounted(true);
+        const savedMessages = localStorage.getItem("zenith_chat_history");
+        if (savedMessages) {
+            try {
+                setMessages(JSON.parse(savedMessages));
+            } catch (e) {
+                console.error("Failed to parse chat history");
+            }
+        }
+    }, []);
+
+    // Save messages to localStorage whenever they change
+    useEffect(() => {
+        if (isMounted) {
+            localStorage.setItem("zenith_chat_history", JSON.stringify(messages));
+        }
+    }, [messages, isMounted]);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -62,6 +83,8 @@ export function ChatWidget() {
             setIsLoading(false);
         }
     };
+
+
 
     return (
         <div className="fixed bottom-10 right-10 z-50 flex flex-col items-end">
