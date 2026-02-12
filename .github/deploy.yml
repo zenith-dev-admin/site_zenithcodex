@@ -2,7 +2,7 @@ name: Deploy Zenith Codex
 
 on:
   push:
-    branches: [ main ] # Dispara quando você dá push na main
+    branches: [ "main" ] # Dispara quando você dá push na main
 
 jobs:
   deploy:
@@ -12,7 +12,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          username: root
           key: ${{ secrets.SSH_KEY }}
           port: 65002
           script: |
