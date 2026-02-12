@@ -48,7 +48,7 @@ export async function POST(req: Request) {
         // I'll assume they meant 1.5-flash (current state of art fast model) or 2.0-pro-exp. 
         // I'll stick to 'gemini-1.5-flash' as it is robust and fast.
 
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const chat = model.startChat({
             history: [
