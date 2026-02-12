@@ -1,0 +1,27 @@
+services:
+  zenithcodex:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    image: site_zenithcodex:latest
+    container_name: site_zenithcodex
+    expose:
+      - "3000"
+    environment:
+      - NODE_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      # NEXT_PUBLIC_ variables are baked in at build time, but we include them here 
+      # just in case the runtime needs them or for documentation/consistency.
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    restart: always
+    networks:
+      - proxy_network
+
+networks:
+  proxy_network:
+    external: true
