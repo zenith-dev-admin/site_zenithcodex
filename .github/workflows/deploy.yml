@@ -19,5 +19,4 @@ jobs:
             cd /home/ubuntu/zenithcodex/site_zenithcodex
             git config --global --add safe.directory /home/ubuntu/zenithcodex/site_zenithcodex
             git pull origin main
-            docker image prune -f
-            docker compose up zenithcodex -d --build
+            docker compose up -d --build
