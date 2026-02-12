@@ -16,7 +16,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 65002
           script: |
-            cd /home/ubuntu/zenithcodex/site_zenithcodex
-            git config --global --add safe.directory /home/ubuntu/zenithcodex/site_zenithcodex
+            PROJECT_PATH="/home/ubuntu/zenithcodex/site_zenithcodex"
+            cd $PROJECT_PATH || { echo "Erro: Pasta não encontrada"; exit 1; }
+            git config --global --add safe.directory $PROJECT_PATH
+            export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_ed25519"
             git pull origin main
-            docker compose up -d --build
+            docker compose up zenithcodex -d --build  
