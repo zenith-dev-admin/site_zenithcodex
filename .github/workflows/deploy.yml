@@ -16,8 +16,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 65002
           script: |
-            cd /home/ubuntu/zenithcodex
-            git config --global --add safe.directory /home/ubuntu/zenithcodex
+            cd /home/ubuntu/zenithcodex/site_zenithcodex
+            git config --global --add safe.directory /home/ubuntu/zenithcodex/site_zenithcodex
             git pull origin main
             docker image prune -f
             docker compose up zenithcodex -d --build
