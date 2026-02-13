@@ -1,40 +1,31 @@
+"use client"; // ESSENCIAL no topo
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Home } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function NotFound() {
-    return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-950 text-white p-4 text-center">
-            <div className="relative mb-8">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#8c52ff]/20 rounded-full blur-[80px]" />
-                <h1 className="relative text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-zinc-800 to-zinc-950 select-none">
-                    404
-                </h1>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl font-bold text-[#8c52ff] animate-pulse">
-                    ZENITH<span className="text-white">CODEX</span>
-                </div>
-            </div>
+    const router = useRouter();
 
-            <h2 className="text-2xl md:text-4xl font-bold mb-4">
-                Página Não Encontrada
-            </h2>
-            <p className="text-zinc-400 max-w-md mb-8">
-                Parece que você navegou para um território desconhecido.
-                O sistema não conseguiu localizar o endpoint solicitado.
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-950 text-white p-4">
+            <h1 className="text-9xl font-bold text-[#8c52ff]">404</h1>
+            <h2 className="text-2xl mt-4 font-semibold">Parece que você se perdeu no código.</h2>
+            <p className="text-zinc-400 mt-2 text-center max-w-md">
+                A página que você está procurando não existe ou foi movida.
+                O Zen pode te ajudar a voltar para o início.
             </p>
 
-            <div className="flex gap-4">
-                <Button asChild variant="default" className="bg-[#8c52ff] hover:bg-[#7a41eb]">
-                    <Link href="/">
-                        <Home className="mr-2 h-4 w-4" />
-                        Voltar ao Início
-                    </Link>
+            <div className="flex gap-4 mt-8">
+                <Button
+                    onClick={() => router.push("/")}
+                    className="bg-[#8c52ff] hover:bg-[#7a41eb]"
+                >
+                    Voltar para Home
                 </Button>
-                <Button asChild variant="outline" className="border-zinc-800 hover:bg-zinc-900 text-zinc-300">
-                    <Link href="#" onClick={() => window.history.back()}>
-                        <ArrowLeft className="mr-2 h-4 w-4" />
-                        Voltar
-                    </Link>
+
+                <Button variant="outline" asChild>
+                    <Link href="/orcamento">Solicitar Orçamento</Link>
                 </Button>
             </div>
         </div>
