@@ -10,7 +10,7 @@ export function WhatsAppButton() {
 
     useEffect(() => {
         const toggleVisibility = () => {
-            if (window.scrollY > 300) {
+            if (window.scrollY > 1000) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);
@@ -32,7 +32,7 @@ export function WhatsAppButton() {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-                "fixed bottom-6 left-6 z-50 flex items-center gap-2 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:bg-[#128C7E] hover:scale-110 transition-all duration-300 group",
+                "fixed top-20 left-6 z-50 flex items-center gap-2 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:bg-[#128C7E] hover:scale-110 transition-all duration-300 group",
                 isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
             )}
         >

@@ -57,14 +57,16 @@ export function HeroSection() {
                 </div>
 
                 {/* Rodapé da Hero - Prova Social ou Tecnologias */}
-                <div className="pt-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <div className="pt-16 opacity-90 grayscale hover:grayscale-0 transition-all duration-500">
                     <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 mb-6">Expertise em Ecossistemas Digitais</p>
                     <div className="flex flex-wrap justify-center gap-8 md:gap-16">
                         {/* Aqui você pode colocar logos sutis ou apenas nomes de conceitos */}
-                        <span className="text-zinc-400 font-medium hover:text-[#8c52ff] transition-colors">Next.js 15</span>
-                        <span className="text-zinc-400 font-medium hover:text-[#3ECF8E] transition-colors">Supabase</span>
-                        <span className="text-zinc-400 font-medium hover:text-[#4285F4] transition-colors">Google Gemini</span>
-                        <span className="text-zinc-400 font-medium hover:text-[#38BDF8] transition-colors">Tailwind CSS</span>
+                        <img src="gcp.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Google Cloud Platform" />
+                        <img src="docker.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Docker" />
+                        <img src="airflow.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Apache Airflow" />
+                        <img src="next.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Next.js" />
+                        <img src="node.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Node.js" />
+                        <img src="python.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Python" />
                     </div>
                 </div>
             </div>

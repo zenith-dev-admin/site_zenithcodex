@@ -18,7 +18,7 @@ export function AboutSection() {
                         </h2>
 
                         <p className="text-lg text-zinc-400 leading-relaxed">
-                            A ZenithCodex nasceu da necessidade de conectar empresas ao futuro da tecnologia. Não entregamos apenas software; arquitetamos ecossistemas digitais que automatizam o presente e preveem o amanhã.
+                            A ZenithCodex nasceu da necessidade de conectar empresas ao futuro da tecnologia. Não entregamos apenas software: arquitetamos ecossistemas digitais que automatizam o presente e preveem o amanhã.
                         </p>
 
                         <div className="grid grid-cols-1 gap-4 pt-4">
@@ -33,7 +33,7 @@ export function AboutSection() {
                                 <div className="flex-none"><Rocket className="h-6 w-6 text-[#8c52ff]" /></div>
                                 <div>
                                     <h4 className="font-bold text-white text-sm">Nossa Visão</h4>
-                                    <p className="text-sm text-zinc-500">Ser a referência global em integração entre inteligência humana e artificial.</p>
+                                    <p className="text-sm text-zinc-500">Ser referência em integração entre inteligência humana e artificial.</p>
                                 </div>
                             </div>
                         </div>
