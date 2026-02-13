@@ -5,15 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageCircle, X, Send, Loader2 } from "lucide-react";
+import { X, Send } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import ReactMarkdown from "react-markdown";
 import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import ReactMarkdown from "react-markdown";
 
 type Message = {
     role: "user" | "assistant";
@@ -25,10 +25,14 @@ export function ChatWidget() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+
+    // --- NOVOS ESTADOS PARA A TAG FLUTUANTE ---
+    const [showTag, setShowTag] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+
     const scrollRef = useRef<HTMLDivElement>(null);
     const [isMounted, setIsMounted] = useState(false);
 
-    // Load messages from localStorage on mount
     useEffect(() => {
         setIsMounted(true);
         const savedMessages = localStorage.getItem("zenith_chat_history");
@@ -41,12 +45,26 @@ export function ChatWidget() {
         }
     }, []);
 
-    // Save messages to localStorage whenever they change
     useEffect(() => {
         if (isMounted) {
             localStorage.setItem("zenith_chat_history", JSON.stringify(messages));
         }
     }, [messages, isMounted]);
+
+    // --- LÓGICA DE SCROLL PARA MOSTRAR A TAG ---
+    useEffect(() => {
+        const handleScroll = () => {
+            // Se rolar mais de 300px, mostra a tag
+            if (window.scrollY > 300) {
+                setShowTag(true);
+            } else {
+                setShowTag(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     useEffect(() => {
         const scrollToBottom = () => {
@@ -55,13 +73,11 @@ export function ChatWidget() {
                 if (scrollContainer) {
                     scrollContainer.scrollTo({
                         top: scrollContainer.scrollHeight,
-                        behavior: isOpen ? "smooth" : "auto", // Suave se estiver aberto, instantâneo se estiver abrindo agora
+                        behavior: isOpen ? "smooth" : "auto",
                     });
                 }
             }
         };
-
-        // Pequeno timeout para garantir que o DOM atualizou após a renderização da mensagem
         const timeoutId = setTimeout(scrollToBottom, 100);
         return () => clearTimeout(timeoutId);
     }, [messages, isOpen, isLoading]);
@@ -103,7 +119,7 @@ export function ChatWidget() {
 
         if (parts.length === 1) {
             return (
-                <div className="prose prose-invert max-w-none text-sm leading-relaxed">
+                <div className="prose prose-invert max-w-none text-sm leading-relaxed text-zinc-100 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mt-1">
                     <ReactMarkdown>{content}</ReactMarkdown>
                 </div>
             );
@@ -114,7 +130,7 @@ export function ChatWidget() {
             if (i % 3 === 0) {
                 if (parts[i].trim()) {
                     elements.push(
-                        <div key={`text-${i}`} className="prose prose-invert max-w-none text-sm leading-relaxed">
+                        <div key={`text-${i}`} className="prose prose-invert max-w-none text-sm leading-relaxed text-zinc-100 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mt-1">
                             <ReactMarkdown>{parts[i]}</ReactMarkdown>
                         </div>
                     );
@@ -137,13 +153,36 @@ export function ChatWidget() {
         return <div className="flex flex-col gap-1">{elements}</div>;
     };
 
+    // --- RENDERIZAÇÃO PRINCIPAL COM DETECÇÃO DE HOVER ---
     return (
-        <div className="fixed bottom-10 right-10 z-50 flex flex-col items-end">
+        <div
+            className="fixed bottom-10 right-10 z-50 flex flex-col items-end"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* --- TAG FLUTUANTE (BALÃO DE FALA) --- */}
+            <div
+                className={cn(
+                    "absolute right-24 bottom-6 w-max max-w-[200px] bg-zinc-900/90 backdrop-blur-md border border-[#8c52ff]/50 text-white px-4 py-3 rounded-2xl rounded-tr-sm shadow-2xl transition-all duration-500 ease-in-out transform origin-bottom-right pointer-events-none select-none",
+                    // Regras de Visibilidade:
+                    // Mostra se: Scroll > 300px (showTag) E Mouse fora (isHovered=false) E Chat fechado (!isOpen)
+                    showTag && !isHovered && !isOpen
+                        ? "opacity-100 translate-y-0 scale-100"
+                        : "opacity-0 translate-y-4 scale-90"
+                )}
+            >
+                <p className="text-sm font-medium leading-tight">
+                    Olá! Quer ajuda com seu projeto?
+                </p>
+                {/* Triângulo (Seta) do balão apontando para o Zen */}
+                <div className="absolute -right-2 top-4 w-0 h-0 border-t-[8px] border-t-transparent border-l-[10px] border-l-[#8c52ff]/50 border-b-[8px] border-b-transparent"></div>
+            </div>
+
             {isOpen && (
-                <Card className="w-[350px] h-[500px] mb-4 shadow-xl flex flex-col border border-zinc-800 bg-zinc-950 animate-in slide-in-from-bottom-10 fade-in duration-300">
+                <Card className="w-[350px] h-[80vh] mb-4 shadow-2xl flex flex-col border border-zinc-800 bg-zinc-950 animate-in slide-in-from-bottom-10 fade-in duration-300">
                     <CardHeader className="bg-[#8c52ff] text-primary-foreground p-4 flex flex-row items-center justify-between space-y-0">
                         <div className="flex items-center gap-2">
-                            <div className="relative h-12 w-12 rounded-full bg-white p-1">
+                            <div className="relative h-12 w-12 rounded-full bg-white p-1 overflow-hidden">
                                 <Image src="/Zen.svg" alt="Zen Avatar" fill className="rounded-full object-cover" />
                             </div>
                             <div>
@@ -161,7 +200,7 @@ export function ChatWidget() {
                                 <div className="text-center text-muted-foreground mt-8 text-sm px-6">
                                     <p>Olá! Sou o Zen.</p>
                                     <p className="mt-2">Posso ajudar com dúvidas sobre nossos serviços ou encaminhar seu projeto.</p>
-                                    <p className="text-[10px] mt-1 font-light text-gray-400">{"{"} Ao utilizar o Zen, você concorda com nossa {"}"}<a href="/privacy" className="text-[#8c52ff] underline hover:text-[#8c52ff]/80 transition-all">política de privacidade</a>.</p>
+                                    <p className="text-[10px] mt-1 font-light text-gray-400">Ao utilizar o Zen, você concorda com nossa <a href="/privacy" className="text-[#8c52ff] underline hover:text-[#8c52ff]/80 transition-all">política de privacidade</a>.</p>
                                 </div>
                             )}
                             <div className="flex flex-col gap-4">
@@ -169,12 +208,11 @@ export function ChatWidget() {
                                     <div
                                         key={i}
                                         className={cn(
-                                            "flex flex-col gap-2 rounded-lg px-3 py-2 text-sm max-w-[80%] break-words",
-                                            // Classes de Animação:
+                                            "flex flex-col gap-2 rounded-lg px-3 py-2 text-sm max-w-[80%] break-words shadow-sm",
                                             "animate-in fade-in slide-in-from-bottom-2 duration-300 ease-out",
                                             m.role === "user"
                                                 ? "ml-auto bg-[#8c52ff] text-white"
-                                                : "mr-auto bg-zinc-800 text-white"
+                                                : "mr-auto bg-zinc-800 text-white border border-zinc-700"
                                         )}
                                     >
                                         {renderMessageContent(m.content)}
@@ -192,16 +230,16 @@ export function ChatWidget() {
                             </div>
                         </ScrollArea>
                     </CardContent>
-                    <CardFooter className="p-3 border-t bg-background">
+                    <CardFooter className="p-3 border-t border-zinc-800 bg-zinc-900/50">
                         <form onSubmit={handleSubmit} className="flex w-full gap-2">
                             <Input
                                 placeholder="Digite sua mensagem..."
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 disabled={isLoading}
-                                className="flex-1"
+                                className="flex-1 bg-zinc-950 border-zinc-700 focus:border-[#8c52ff]"
                             />
-                            <Button type="submit" size="icon" disabled={isLoading}>
+                            <Button type="submit" size="icon" disabled={isLoading} className="bg-[#8c52ff] hover:bg-[#7a41eb]">
                                 <Send className="h-4 w-4" />
                             </Button>
                         </form>
@@ -215,15 +253,22 @@ export function ChatWidget() {
                         <Button
                             onClick={() => setIsOpen(true)}
                             size="icon"
-                            className="h-20 w-20 flex items-center gap-2 bg-transparent border border-[#8c52ff] rounded-full"
+                            // Aumentei o tamanho do botão e adicionei sombra/glow roxo para destacar
+                            className="h-20 w-20 flex items-center justify-center gap-2 bg-transparent border border-[#8c52ff]/30 hover:border-[#8c52ff] rounded-full shadow-[0_0_15px_rgba(140,82,255,0.2)] hover:shadow-[0_0_25px_rgba(140,82,255,0.4)] transition-all duration-300 group overflow-hidden"
                         >
-                            <div className="cursor-pointer">
-                                <Image src="/Zen.svg" alt="Chat" fill className="relative h-18 w-18 rounded-full p-1" />
+                            <div className="cursor-pointer relative w-full h-full">
+                                <Image
+                                    src="/zen.gif"
+                                    alt="Chat"
+                                    fill
+                                    // Adicionei efeito de escala ao passar o mouse
+                                    className="object-cover rounded-full p-0.5 group-hover:scale-110 transition-transform duration-500"
+                                />
                             </div>
                         </Button>
                     </TooltipTrigger>
-                    <TooltipContent side="left" className="bg-w text-primary-foreground border-none">
-                        <p>Pergunte ao Zen!</p>
+                    <TooltipContent side="left" className="bg-[#8c52ff] text-white border-none">
+                        <p>Falar com o Zen</p>
                     </TooltipContent>
                 </Tooltip>
             )}

@@ -22,7 +22,7 @@ export function WhatsAppButton() {
     }, []);
 
     // Substitua pelo número real
-    const phoneNumber = "5511999999999";
+    const phoneNumber = "5521999923247";
     const message = "Olá! Gostaria de saber mais sobre as soluções da ZenithCodex.";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
