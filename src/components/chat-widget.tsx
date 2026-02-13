@@ -148,7 +148,7 @@ export function ChatWidget() {
                                 <div className="text-center text-muted-foreground mt-8 text-sm px-6">
                                     <p>Olá! Sou o Zen.</p>
                                     <p className="mt-2">Posso ajudar com dúvidas sobre nossos serviços ou encaminhar seu projeto.</p>
-                                    <p className="text-[10px] mt-1 font-light text-gray-400">Ao utilizar o Zen, você concorda com nossa <a href="/privacy" className="text-[#8c52ff] underline hover:text-[#8c52ff]/80 transition-all">política de privacidade</a>.</p>
+                                    <p className="text-[10px] mt-1 font-light text-gray-400">{"{"} Ao utilizar o Zen, você concorda com nossa {"}"}<a href="/privacy" className="text-[#8c52ff] underline hover:text-[#8c52ff]/80 transition-all">política de privacidade</a>.</p>
                                 </div>
                             )}
                             <div className="flex flex-col gap-4">

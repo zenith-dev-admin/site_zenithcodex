@@ -61,10 +61,10 @@ export function HeroSection() {
                     <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 mb-6">Expertise em Ecossistemas Digitais</p>
                     <div className="flex flex-wrap justify-center gap-8 md:gap-16">
                         {/* Aqui você pode colocar logos sutis ou apenas nomes de conceitos */}
-                        <span className="text-zinc-400 font-medium">Artificial Intelligence</span>
-                        <span className="text-zinc-400 font-medium">Data Science</span>
-                        <span className="text-zinc-400 font-medium">Workflow Automation</span>
-                        <span className="text-zinc-400 font-medium">Cloud Infrastructure</span>
+                        <span className="text-zinc-400 font-medium hover:text-[#8c52ff] transition-colors">Next.js 15</span>
+                        <span className="text-zinc-400 font-medium hover:text-[#3ECF8E] transition-colors">Supabase</span>
+                        <span className="text-zinc-400 font-medium hover:text-[#4285F4] transition-colors">Google Gemini</span>
+                        <span className="text-zinc-400 font-medium hover:text-[#38BDF8] transition-colors">Tailwind CSS</span>
                     </div>
                 </div>
             </div>

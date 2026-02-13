@@ -133,13 +133,33 @@ export default function OrcamentoPage() {
                                     <FormField control={form.control} name="phone" render={({ field }) => (
                                         <FormItem>
                                             <FormLabel className="text-zinc-300">WhatsApp / Telefone</FormLabel>
-                                            <FormControl><Input className="bg-zinc-950 border-zinc-800 focus:border-[#8c52ff]" placeholder="(11) 99999-9999" {...field} /></FormControl>
+                                            <FormControl>
+                                                <Input
+                                                    className="bg-zinc-950 border-zinc-800 focus:border-[#8c52ff]"
+                                                    placeholder="(11) 99999-9999"
+                                                    {...field}
+                                                    onChange={(e) => {
+                                                        let value = e.target.value.replace(/\D/g, "");
+                                                        if (value.length > 11) value = value.slice(0, 11);
+
+                                                        // Máscara (XX) XXXXX-XXXX
+                                                        if (value.length > 2) {
+                                                            value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+                                                        }
+                                                        if (value.length > 7) { // (XX) X
+                                                            value = `${value.slice(0, 9)}-${value.slice(9)}`; // (XX) XXXXX-
+                                                        }
+
+                                                        field.onChange(value);
+                                                    }}
+                                                />
+                                            </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )} />
                                     <FormField control={form.control} name="companySize" render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="text-zinc-300">Tamanho da Empresa</FormLabel>
+                                            <FormLabel className="text-zinc-300">Tamanho da Empresa (# funcionários)</FormLabel>
                                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                 <FormControl><SelectTrigger className="bg-zinc-950 border-zinc-800"><SelectValue placeholder="Selecione..." /></SelectTrigger></FormControl>
                                                 <SelectContent className="bg-zinc-900 border-zinc-800">

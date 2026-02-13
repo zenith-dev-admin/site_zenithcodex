@@ -6,17 +6,24 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
   const [isOpen, setIsOpen] = useState(false);
 
+  const getHref = (target: string) => {
+    return isHome ? target : `/${target}`;
+  };
+
   const navigation = [
-    { name: "Quem somos?", href: "#about" },
-    { name: "Soluções", href: "#solutions" },
+    { name: "Quem somos?", href: getHref("#about") },
+    { name: "Soluções", href: getHref("#solutions") },
   ];
 
   return (
-    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+    <nav className="fixed top-0 inset-x-0 z-50 border-b border-white/5 bg-zinc-950/80 backdrop-blur-md transition-all duration-300">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6 mx-auto">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center space-x-2">
@@ -70,7 +77,7 @@ export function Navbar() {
                 ))}
                 <div className="pt-4">
                   <Button className="w-full" asChild>
-                    <Link href="/orcamento" onClick={() => setIsOpen(false)}>
+                    <Link href={"/orcamento"} onClick={() => setIsOpen(false)}>
                       Qual o seu projeto?
                     </Link>
                   </Button>

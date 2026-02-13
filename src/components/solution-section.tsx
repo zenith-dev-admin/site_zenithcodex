@@ -21,7 +21,7 @@ export function SolutionsSection() {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {/* 1. Agentes de IA */}
-                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-colors">
+                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(140,82,255,0.15)]">
                         <CardHeader>
                             <Bot className="h-10 w-10 text-[#8c52ff] mb-2" />
                             <CardTitle>Agentes de IA</CardTitle>
@@ -35,7 +35,7 @@ export function SolutionsSection() {
                     </Card>
 
                     {/* 2. Automação de Fluxos */}
-                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-colors">
+                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(140,82,255,0.15)]">
                         <CardHeader>
                             <Zap className="h-10 w-10 text-[#8c52ff] mb-2" />
                             <CardTitle>Automação de Workflow</CardTitle>
@@ -49,7 +49,7 @@ export function SolutionsSection() {
                     </Card>
 
                     {/* 3. Apps Web de Alta Performance */}
-                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-colors">
+                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(140,82,255,0.15)]">
                         <CardHeader>
                             <Globe className="h-10 w-10 text-[#8c52ff] mb-2" />
                             <CardTitle>Web Apps Premium</CardTitle>
@@ -63,7 +63,7 @@ export function SolutionsSection() {
                     </Card>
 
                     {/* 4. Ciência de Dados */}
-                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-colors">
+                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(140,82,255,0.15)]">
                         <CardHeader>
                             <BarChart3 className="h-10 w-10 text-[#8c52ff] mb-2" />
                             <CardTitle>Data Science</CardTitle>
@@ -77,7 +77,7 @@ export function SolutionsSection() {
                     </Card>
 
                     {/* 5. Machine Learning */}
-                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-colors">
+                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(140,82,255,0.15)]">
                         <CardHeader>
                             <BrainCircuit className="h-10 w-10 text-[#8c52ff] mb-2" />
                             <CardTitle>Machine Learning</CardTitle>
@@ -91,7 +91,7 @@ export function SolutionsSection() {
                     </Card>
 
                     {/* 6. Infraestrutura e VPS */}
-                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-colors">
+                    <Card className="bg-zinc-900 border-zinc-800 hover:border-[#8c52ff] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(140,82,255,0.15)]">
                         <CardHeader>
                             <Database className="h-10 w-10 text-[#8c52ff] mb-2" />
                             <CardTitle>Infraestrutura Crítica</CardTitle>

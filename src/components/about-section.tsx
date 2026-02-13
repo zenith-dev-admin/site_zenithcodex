@@ -4,13 +4,14 @@ export function AboutSection() {
     return (
         <section id="about" className="py-24 px-4 md:px-6 bg-zinc-950">
             <div className="container mx-auto max-w-[1100px]">
+
+                <div className="inline-block px-3 py-1 mb-5 rounded-full bg-[#8c52ff]/10 border border-[#8c52ff]/20 text-[#8c52ff] text-xs font-bold uppercase tracking-wider">
+                    Sobre a ZenithCodex
+                </div>
                 <div className="grid md:grid-cols-2 gap-16 items-center">
 
                     {/* Lado Esquerdo: Conteúdo */}
                     <div className="space-y-6">
-                        <div className="inline-block px-3 py-1 rounded-full bg-[#8c52ff]/10 border border-[#8c52ff]/20 text-[#8c52ff] text-xs font-bold uppercase tracking-wider">
-                            Sobre a ZenithCodex
-                        </div>
 
                         <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
                             Transformando códigos em <span className="text-[#8c52ff]">vantagem competitiva.</span>
@@ -39,11 +40,11 @@ export function AboutSection() {
                     </div>
 
                     {/* Lado Direito: Visual Criativo */}
-                    <div className="relative">
+                    <div className="relative group">
                         {/* Elemento de decoração atrás */}
-                        <div className="absolute -inset-4 bg-[#8c52ff]/20 rounded-xl blur-2xl -z-10" />
+                        <div className="absolute -inset-4 bg-[#8c52ff]/20 rounded-xl blur-2xl -z-10 group-hover:bg-[#8c52ff]/30 transition-all duration-500" />
 
-                        <div className="relative aspect-square md:aspect-auto md:h-[450px] w-full bg-zinc-900 rounded-2xl border border-zinc-800 p-8 overflow-hidden flex flex-col justify-center">
+                        <div className="relative aspect-square md:aspect-auto md:h-[450px] w-full bg-zinc-900 rounded-2xl border border-zinc-800 p-8 overflow-hidden flex flex-col justify-center transition-all duration-300 group-hover:scale-[1.01] group-hover:shadow-[0_0_30px_rgba(140,82,255,0.15)]">
                             {/* Simulação de Interface de Código/IA */}
                             <div className="space-y-4 opacity-40 select-none pointer-events-none font-mono text-xs">
                                 <div className="text-purple-400">class ZenithCodex {'{'}</div>

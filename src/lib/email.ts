@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY || "re_123456789");
 export async function sendEmail({ to, subject, html }: { to: string; subject: string; html: string }) {
     try {
         const data = await resend.emails.send({
-            from: 'ZenithCodex <onboarding@resend.dev>', // Update with verify domain in production
+            from: 'ZenithCodex <comercial@noreply.zenithcodex.com>', // Update with verify domain in production
             to: [to],
             subject: subject,
             html: html,
