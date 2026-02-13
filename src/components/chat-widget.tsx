@@ -13,6 +13,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import ReactMarkdown from "react-markdown";
 
 type Message = {
     role: "user" | "assistant";
@@ -97,32 +98,44 @@ export function ChatWidget() {
     };
 
     const renderMessageContent = (content: string) => {
-        const buttonRegex = /\[BUTTON: (.*?)\| (.*?)\]/g
-        const parts = content.split(buttonRegex)
+        const buttonRegex = /\[BUTTON: (.*?)\| (.*?)\]/g;
+        const parts = content.split(buttonRegex);
 
-        if (parts.length === 1) return content
+        if (parts.length === 1) {
+            return (
+                <div className="prose prose-invert max-w-none text-sm leading-relaxed">
+                    <ReactMarkdown>{content}</ReactMarkdown>
+                </div>
+            );
+        }
 
-        const elements = []
+        const elements = [];
         for (let i = 0; i < parts.length; i++) {
             if (i % 3 === 0) {
-                elements.push(parts[i])
+                if (parts[i].trim()) {
+                    elements.push(
+                        <div key={`text-${i}`} className="prose prose-invert max-w-none text-sm leading-relaxed">
+                            <ReactMarkdown>{parts[i]}</ReactMarkdown>
+                        </div>
+                    );
+                }
             } else if (i % 3 === 1) {
-                const label = parts[i]
-                const url = parts[i + 1]
+                const label = parts[i];
+                const url = parts[i + 1];
                 elements.push(
                     <Button
-                        key={i}
+                        key={`btn-${i}`}
                         size="sm"
-                        className="mt-2 block w-full bg-[#8c52ff] cursor-pointer hover:bg-[#8c52ff]/20 text-white transition-all"
-                        onClick={() => window.location.href = url}
+                        className="mt-3 block w-full bg-[#8c52ff] hover:bg-[#7a41eb] text-white transition-all font-bold shadow-lg"
+                        onClick={() => (window.location.href = url)}
                     >
                         {label}
                     </Button>
-                )
+                );
             }
         }
-        return elements
-    }
+        return <div className="flex flex-col gap-1">{elements}</div>;
+    };
 
     return (
         <div className="fixed bottom-10 right-10 z-50 flex flex-col items-end">

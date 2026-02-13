@@ -19,10 +19,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://zenithcodex.com'), // Substitua pelo domínio real
   title: {
-    default: "ZenithCodex | Soluções Digitais Profissionais",
+    default: "ZenithCodex | Soluções Digitais com IA",
     template: "%s | ZenithCodex"
   },
-  description: "Transformando ideias em realidade digital com as melhores tecnologias do mercado. Especialistas em IA, Web Apps e Automação.",
+  description: "Desenvolvimento de Software Premium, Inteligência Artificial e Automação de Processos para transformar seu negócio.",
   keywords: ["Desenvolvimento Web", "Inteligência Artificial", "Next.js", "React", "Automação", "Software House", "Chatbots"],
   authors: [{ name: "ZenithCodex Team" }],
   creator: "ZenithCodex",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico' },
-      { url: '/icon.png', type: 'image/png' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
     ],
     apple: [
       { url: '/apple-icon.png' },
@@ -103,23 +103,22 @@ export default function RootLayout({
               "name": "ZenithCodex",
               "url": "https://zenithcodex.com",
               "logo": "https://zenithcodex.com/icon.png",
-              "description": "Desenvolvimento de Software Premium, Inteligência Artificial e Automação de Processos.",
-              "address": {
+              "description": "ZenithCodex - Soluções Digitais com IA. Especialistas em automação e software de alta performance.", "address": {
                 "@type": "PostalAddress",
                 "addressCountry": "BR",
-                "addressRegion": "SP" // Ajuste conforme a sede
+                "addressRegion": "RJ" // Ajuste conforme a sede
               },
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+55-11-99999-9999", // Ajuste para o telefone real
+                "telephone": "+55-21-99992-3247", // Ajuste para o telefone real
                 "contactType": "sales",
                 "areaServed": "BR",
                 "availableLanguage": ["Portuguese", "English"]
               },
-              "sameAs": [
-                "https://www.linkedin.com/company/zenithcodex", // Adicione links reais
-                "https://github.com/zenithcodex"
-              ]
+              // "sameAs": [
+              //   "https://www.linkedin.com/company/zenithcodex", // Adicione links reais
+              //   "https://github.com/zenithcodex"
+              // ]
             })
           }}
         />
