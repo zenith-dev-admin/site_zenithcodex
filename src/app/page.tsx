@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { ArrowRight, Code, Server, MessageSquare } from "lucide-react";
+import { SolutionsSection } from "@/components/solution-section";
+import { QualityCommitment } from "@/components/quality-commitment";
 
 export default function Home() {
   return (
@@ -49,71 +51,10 @@ export default function Home() {
       </section>
 
       {/* Solutions Section */}
-      <section id="solutions" className="py-20 px-4 md:px-6">
-        <div className="container mx-auto max-w-[1200px]">
-          <div className="text-center mb-12 space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Nossas Soluções</h2>
-            <p className="text-muted-foreground max-w-[600px] mx-auto">
-              Tecnologia de ponta para resolver desafios reais.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <Code className="h-10 w-10 text-primary mb-2" />
-                <CardTitle>Desenvolvimento Web</CardTitle>
-                <CardDescription>Sites e Web Apps modernos e responsivos.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Utilizamos Next.js, Shadcn UI e Tailwind CSS para criar interfaces incríveis e performáticas.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <MessageSquare className="h-10 w-10 text-primary mb-2" />
-                <CardTitle>Agentes de IA</CardTitle>
-                <CardDescription>Chatbots inteligentes com Google Gemini.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Integração de assistentes virtuais personalizados para atendimento e automação de processos.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Server className="h-10 w-10 text-primary mb-2" />
-                <CardTitle>Infraestrutura VPS</CardTitle>
-                <CardDescription>Hospedagem segura e escalável com Docker.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Deploy otimizado em containers Docker, garantindo estabilidade e performance para sua aplicação.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <SolutionsSection />
 
       {/* Disclaimers Section */}
-      <section className="py-12 px-4 md:px-6 bg-muted/50 text-center">
-        <div className="container mx-auto max-w-[800px] space-y-4">
-          <h3 className="font-semibold text-lg">Compromisso com a Qualidade</h3>
-          <p className="text-sm text-muted-foreground">
-            Todas as nossas soluções são desenvolvidas seguindo rigorosos padrões de segurança e performance.
-            Garantimos suporte contínuo e atualizações para manter seu negócio sempre à frente.
-          </p>
-          <p className="text-xs text-muted-foreground/60 italic">
-            * Os prazos e valores podem variar de acordo com a complexidade do projeto. Consulte nossa equipe para um orçamento detalhado.
-          </p>
-        </div>
-      </section>
+      <QualityCommitment />
     </div>
   );
 }

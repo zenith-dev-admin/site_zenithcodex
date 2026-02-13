@@ -46,7 +46,7 @@ export function Footer() {
                         <h3 className="font-semibold mb-4">Contato</h3>
                         <ul className="space-y-2 text-sm text-muted-foreground">
                             <li>contato@zenithcodex.com</li>
-                            <li>Av. Paulista, 1000 - São Paulo, SP</li>
+                            <li>Rio de Janeiro, Brasil</li>
                         </ul>
                     </div>
 
