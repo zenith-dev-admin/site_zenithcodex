@@ -17,10 +17,66 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ZenithCodex | Soluções Digitais Profissionais",
-  description: "Transformando ideias em realidade digital com as melhores tecnologias do mercado.",
+  metadataBase: new URL('https://zenithcodex.com'), // Substitua pelo domínio real
+  title: {
+    default: "ZenithCodex | Soluções Digitais Profissionais",
+    template: "%s | ZenithCodex"
+  },
+  description: "Transformando ideias em realidade digital com as melhores tecnologias do mercado. Especialistas em IA, Web Apps e Automação.",
+  keywords: ["Desenvolvimento Web", "Inteligência Artificial", "Next.js", "React", "Automação", "Software House", "Chatbots"],
+  authors: [{ name: "ZenithCodex Team" }],
+  creator: "ZenithCodex",
+  publisher: "ZenithCodex",
+  formatDetection: {
+    email: false, // Evita detecção automática de emails para prevenir spam
+    address: false,
+    telephone: false,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    title: "ZenithCodex | Soluções Digitais de Elite",
+    description: "Desenvolvimento de Software Premium e Soluções de IA para escalar seu negócio.",
+    url: 'https://zenithcodex.com',
+    siteName: 'ZenithCodex',
+    locale: 'pt_BR',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg', // Certifique-se de criar esta imagem em public/
+        width: 1200,
+        height: 630,
+        alt: 'ZenithCodex - Digital Solutions',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "ZenithCodex | Soluções Digitais de Elite",
+    description: "Desenvolvimento de Software Premium e Soluções de IA para escalar seu negócio.",
+    images: ['/og-image.jpg'], // Reutiliza a OG Image
+  },
   icons: {
-    icon: "/icon.svg",
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png' },
+    ],
+  },
+  verification: {
+    google: "google-site-verification=SEU_CODIGO_AQUI",
+    yandex: "yandex-verification=SEU_CODIGO_AQUI",
   },
 };
 
@@ -38,6 +94,35 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "ZenithCodex",
+              "url": "https://zenithcodex.com",
+              "logo": "https://zenithcodex.com/icon.png",
+              "description": "Desenvolvimento de Software Premium, Inteligência Artificial e Automação de Processos.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "BR",
+                "addressRegion": "SP" // Ajuste conforme a sede
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+55-11-99999-9999", // Ajuste para o telefone real
+                "contactType": "sales",
+                "areaServed": "BR",
+                "availableLanguage": ["Portuguese", "English"]
+              },
+              "sameAs": [
+                "https://www.linkedin.com/company/zenithcodex", // Adicione links reais
+                "https://github.com/zenithcodex"
+              ]
+            })
+          }}
+        />
         <Providers>
           <Navbar />
           <main className="flex-1">
