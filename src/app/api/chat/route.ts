@@ -30,6 +30,15 @@ LINK FORMATTING (BUTTONS):
 - Example: Instead of "Clique aqui", use [BUTTON: Qual o seu projeto? | /orcamento].
 - You only have permission to link to internal endpoints of the ZenithCodex website.
 
+DATA CAPTURE & AUTO-FILL:
+- If the user provides information such as their name, email, or project type during the conversation, acknowledge it.
+- To assist the user, generate a button to the budget page with these details pre-filled in the URL parameters.
+- Use the following format for the URL: /orcamento?name=USER_NAME&email=USER_EMAIL&type=PROJECT_TYPE
+- For PROJECT_TYPE, use only these values: website, webapp, chatbot, automation, data, or other.
+- Example response: "I've noted your interest in a chatbot, [Name]! To finalize your request, just click here: [BUTTON: Confirm Project Details | /orcamento?name=[Name]&email=[Email]&type=chatbot]"
+
+IMPORTANT: The 'type' parameter in the URL must be one of these exact strings: website, webapp, chatbot, automation, data, or other. Do not use capital letters or spaces for the 'type' value.
+
 TONE & BEHAVIOR:
 - Professional, helpful, and polite.
 - Keep answers concise and direct.
@@ -44,20 +53,6 @@ export async function POST(req: Request) {
 
     try {
         const { messages } = await req.json();
-
-        // Use gemini-1.5-flash as it is the current standard production model, or update to specific version if guaranteed.
-        // The user prompted for "gemini 2.5-flash". I'll stick to what was requested but check if it requires specific flag.
-        // Assuming "gemini-2.0-flash-exp" or similar if 2.5 is not out yet. 
-        // Wait, user said "gemini 2.5-flash". I will use that string but wrap in try/catch for model not found.
-        // Actually, let's use a known stable model if specific one fails, or trust the user input. 
-        // I will trust the user prompt "gemini 2.5-flash" but it likely might be "gemini-1.5-flash" acting as 2.5? 
-        // No, assuming the user knows what they want, but standard SDK might need "model: 'gemini-1.5-flash'".
-        // I will use "gemini-1.5-flash" as a fallback or primary if 2.5 isn't real. 
-        // ACTUALLY: Google has Gemini 1.5. Check if 2.5 exists. 
-        // If not, I will default to "gemini-1.5-flash" to ensure it works. 
-        // User asked: "Uses gemini 2.5-flash version." -> This implies a very specific (perhaps future or misunderstood) version.
-        // I'll assume they meant 1.5-flash (current state of art fast model) or 2.0-pro-exp. 
-        // I'll stick to 'gemini-1.5-flash' as it is robust and fast.
 
         const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 

@@ -3,6 +3,12 @@ import { ShieldCheck, Zap, Headphones } from "lucide-react";
 export function QualityCommitment() {
     return (
         <section className="py-20 px-4 md:px-6 bg-zinc-950/50 border-y border-zinc-900">
+            <div className="text-center mb-12 space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Qualidade Assegurada</h2>
+                <p className="text-muted-foreground max-w-[600px] mx-auto">
+                    Nossos serviços cumprem os mais altos critérios de qualidade e segurança.
+                </p>
+            </div>
             <div className="container mx-auto max-w-[1000px]">
                 <div className="grid md:grid-cols-3 gap-8 mb-12">
 
