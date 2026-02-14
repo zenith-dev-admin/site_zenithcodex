@@ -64,7 +64,6 @@ export function HeroSection() {
                         <img src="gcp.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Google Cloud Platform" />
                         <img src="docker.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Docker" />
                         <img src="airflow.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Apache Airflow" />
-                        <img src="next.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Next.js" />
                         <img src="node.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Node.js" />
                         <img src="python.svg" className="w-22 h-22 hover:bg-white hover:rounded-full hover:p-2 hover:border hover:border-zinc-800" alt="Python" />
                     </div>
